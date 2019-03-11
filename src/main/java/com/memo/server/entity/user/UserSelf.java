@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "user")
-public class UserSelf extends User implements Serializable {
+public class UserSelf implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,22 +17,18 @@ public class UserSelf extends User implements Serializable {
 
     private int accountType;
 
-    @Override
     public int getUserId() {
         return userId;
     }
 
-    @Override
     public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    @Override
     public String getAccount() {
         return account;
     }
 
-    @Override
     public void setAccount(String account) {
         this.account = account;
     }

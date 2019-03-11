@@ -12,6 +12,7 @@ import java.io.Serializable;
 public class Tag implements Serializable {
     @Id
     private int user_id;
+
     @Id
     private String tag;
 

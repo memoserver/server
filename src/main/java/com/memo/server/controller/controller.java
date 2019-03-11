@@ -1,7 +1,9 @@
 package com.memo.server.controller;
 
+import com.memo.server.entity.memo.pri.Pri;
 import com.memo.server.entity.user.User;
 import com.memo.server.entity.user.UserBase;
+import com.memo.server.repository.memo.pri.PriRepository;
 import com.memo.server.repository.user.UserBaseRepository;
 import com.memo.server.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class controller {
 
-    @Autowired
-    private UserBaseRepository userBaseRepository;
+    private final UserBaseRepository userBaseRepository;
+
+    private final UserRepository userRepository;
+
+    private final PriRepository priRepository;
 
     @Autowired
-    private  UserRepository userRepository;
+    public controller(UserBaseRepository userBaseRepository, UserRepository userRepository, PriRepository priRepository) {
+        this.userBaseRepository = userBaseRepository;
+        this.userRepository = userRepository;
+        this.priRepository = priRepository;
+    }
 
     //@GetMapping(value = "/hello")
     @RequestMapping("/userbase")
@@ -39,7 +48,14 @@ public class controller {
     @RequestMapping("/user")
     public User getUser() {
 
-        System.out.println(userRepository.findUserByUserId(4));
-        return userRepository.findUserByUserId(4);
+        System.out.println(userRepository.findUserByUserId(1));
+        return userRepository.findUserByUserId(1);
+    }
+
+
+    @RequestMapping("/pri")
+    public Pri getPri() {
+        System.out.println(priRepository.findAll());
+        return priRepository.findPriByPrivateId(1);
     }
 }
