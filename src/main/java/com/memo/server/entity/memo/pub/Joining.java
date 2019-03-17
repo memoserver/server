@@ -1,4 +1,4 @@
-package com.memo.server.entity.memo.pub;
+    package com.memo.server.entity.memo.pub;
 
 import com.memo.server.entity.user.UserBase;
 
