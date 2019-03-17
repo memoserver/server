@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class controller {
 
-    private final UserBaseRepository userB-aseRepository;
+    private final UserBaseRepository userBaseRepository;
 
     private final UserRepository userRepository;
 

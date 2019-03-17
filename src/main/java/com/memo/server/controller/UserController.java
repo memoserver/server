@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.memo.server.entity.user.Follow;
 import com.memo.server.entity.user.User;
 import com.memo.server.entity.user.UserSelf;
+import com.memo.server.security.SHA;
 import com.memo.server.service.user.FollowRepository;
 import com.memo.server.service.user.UserBaseRepository;
 import com.memo.server.service.user.UserRepository;
@@ -55,13 +56,12 @@ public class UserController {
             return null;
         }
 
-        // password加密
-        // password =
+        // 加密
+        password = SHA.getSHA(password);
 
         UserSelf userSelf = new UserSelf(account, password, 0);
         userSelf = userSelfRepository.saveAndFlush(userSelf);
-        User user = new User(userSelf.getUserId(), userSelf.getAccount());
-        return user;
+        return new User(userSelf.getUserId(), userSelf.getAccount());
     }
 
     @RequestMapping(value = "modify_information")
