@@ -1,5 +1,4 @@
 package com.memo.server.security;
-import java.security.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
@@ -25,7 +24,7 @@ public class SHA {
 
     public static void main(String args[]) {
         try {
-            String text = "1234";
+            String text = "1234444";
             getResult(text);
         } catch (Exception e) {
             e.printStackTrace();
