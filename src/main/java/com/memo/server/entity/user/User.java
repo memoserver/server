@@ -85,6 +85,11 @@ public class User implements Serializable {
     @JoinColumn(name = "user_id")
     private List<Joining> joinings;
 
+    public User(int userId, String account) {
+        this.userId = userId;
+        this.account = account;
+    }
+
     /**
      * getter & setter
      */

@@ -1,6 +1,14 @@
 package com.memo.server.controller;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSON;
+import com.memo.server.entity.user.Follow;
+import com.memo.server.entity.user.User;
+import com.memo.server.entity.user.UserSelf;
+import com.memo.server.service.user.FollowRepository;
+import com.memo.server.service.user.UserBaseRepository;
+import com.memo.server.service.user.UserRepository;
+import com.memo.server.service.user.UserSelfRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,15 +16,74 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UserController {
 
+    /**
+     * 密码
+     */
+    @Autowired
+    private UserSelfRepository userSelfRepository;
+
+    /**
+     * 无关注
+     */
+    @Autowired
+    private UserBaseRepository userBaseRepository;
+
+    /**
+     * 有关注
+     */
+    @Autowired
+    private UserRepository userRepository;
+
+    /**
+     * 关注
+     */
+    private FollowRepository followRepository;
+
     @RequestMapping(value = "login")
-    public List<Student> addMoreStudents(@RequestParam("account")String account,@RequestParam("password") String password){
-        System.out.println("add_more_students（）方法");
-        List<Student> studentList = (List<Student>) JSONArray.parseArray(str,Student.class);
-        if(null != studentList){
-            for(int i = 0;i<studentList.size();i++){
-                insertInto(studentList.get(i).getName(),studentList.get(i).getAge());
-            }
+    public User login(@RequestParam("account") String account, @RequestParam("password") String password) {
+
+        UserSelf userSelf = userSelfRepository.findUserSelfByAccount(account);
+        User user = userRepository.findUserByUserId(userSelf.getUserId());
+        return user;
+    }
+
+    @RequestMapping(value = "register")
+    public User register(@RequestParam("account") String account, @RequestParam("password") String password) {
+
+        // 用户已存在
+        if (userSelfRepository.existsByAccount(account)) {
+            return null;
         }
-        return studentRepository.findAll();
+
+        // password加密
+        // password =
+
+        UserSelf userSelf = new UserSelf(account, password, 0);
+        userSelf = userSelfRepository.saveAndFlush(userSelf);
+        User user = new User(userSelf.getUserId(), userSelf.getAccount());
+        return user;
+    }
+
+    @RequestMapping(value = "modify_information")
+    public User modify_information(@RequestParam("user") String json) {
+        User user = (User) JSON.parse(json);
+        user = userRepository.saveAndFlush(user);
+
+        return user;
+    }
+
+    @RequestMapping(value = "add_following")
+    public User add_following(@RequestParam("user_id") int user_id, @RequestParam("other_id") int other_id) {
+        Follow follow = new Follow(user_id, other_id);
+        follow = followRepository.saveAndFlush(follow);
+
+        User user = userRepository.findUserByUserId(user_id);
+        return user;
+    }
+
+    @RequestMapping(value = "view_information")
+    public User view_information(@RequestParam("user_id") int user_id) {
+        User user = userRepository.findUserByUserId(user_id);
+        return user;
     }
 }
