@@ -1,4 +1,4 @@
-package com.memo.server.repository.user;
+package com.memo.server.service.user;
 
 import com.memo.server.entity.user.Follow;
 import org.springframework.data.jpa.repository.JpaRepository;

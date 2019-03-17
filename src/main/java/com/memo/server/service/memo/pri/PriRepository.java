@@ -1,4 +1,4 @@
-package com.memo.server.repository.memo.pri;
+package com.memo.server.service.memo.pri;
 
 import com.memo.server.entity.memo.pri.Pri;
 import org.springframework.data.jpa.repository.JpaRepository;
