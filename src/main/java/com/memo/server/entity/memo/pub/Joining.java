@@ -1,4 +1,4 @@
-package com.memo.server.entity.memo.pub;
+    package com.memo.server.entity.memo.pub;
 
 import com.memo.server.entity.user.UserBase;
 
@@ -22,6 +22,12 @@ public class Joining implements Serializable {
     private Pub pub;
 
     private Date time;
+
+    public Joining(UserBase user, Pub pub, Date time) {
+        this.user = user;
+        this.pub = pub;
+        this.time = time;
+    }
 
     public UserBase getUser() {
         return user;
