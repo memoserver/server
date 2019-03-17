@@ -23,6 +23,12 @@ public class Joining implements Serializable {
 
     private Date time;
 
+    public Joining(UserBase user, Pub pub, Date time) {
+        this.user = user;
+        this.pub = pub;
+        this.time = time;
+    }
+
     public UserBase getUser() {
         return user;
     }

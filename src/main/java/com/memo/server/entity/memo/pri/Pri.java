@@ -35,6 +35,8 @@ public class Pri implements Serializable {
 
     private Date alarmTime;
 
+    private boolean urgent;
+
     public int getPrivateId() {
         return privateId;
     }
@@ -97,5 +99,13 @@ public class Pri implements Serializable {
 
     public void setAlarmTime(Date alarmTime) {
         this.alarmTime = alarmTime;
+    }
+
+    public boolean isUrgent() {
+        return urgent;
+    }
+
+    public void setUrgent(boolean urgent) {
+        this.urgent = urgent;
     }
 }

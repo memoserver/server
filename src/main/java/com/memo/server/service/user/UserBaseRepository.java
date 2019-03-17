@@ -11,4 +11,6 @@ import javax.persistence.Inheritance;
 public interface UserBaseRepository extends JpaRepository<UserBase,Integer> {
 
     UserBase findUserBaseByUserId(int userId);
+
+    UserBase findUserBaseByAccount(String account);
 }
