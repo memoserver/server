@@ -30,6 +30,7 @@ public class UserControllerTest {
     }
 
     //验证controller是否正常响应并打印返回结果
+    @Ignore
     @Test
     public void loginin() throws Exception {
         Map<String, String> map = new HashMap<>();
