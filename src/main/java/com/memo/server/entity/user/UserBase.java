@@ -34,6 +34,9 @@ public class UserBase implements Serializable {
     @JoinColumn(name = "user_id")
     private List<Tag> tags;
 
+    public UserBase() {
+    }
+
     public int getUserId() {
         return userId;
     }

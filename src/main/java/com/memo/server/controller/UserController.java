@@ -10,11 +10,11 @@ import com.memo.server.service.user.UserBaseRepository;
 import com.memo.server.service.user.UserRepository;
 import com.memo.server.service.user.UserSelfRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class UserController {
 
     /**
@@ -43,9 +43,21 @@ public class UserController {
     @RequestMapping(value = "login")
     public User login(@RequestParam("account") String account, @RequestParam("password") String password) {
 
+        // 用户名不存在
+        if (!userSelfRepository.existsByAccount(account)) {
+            System.out.println(3);
+            return null;
+        }
         UserSelf userSelf = userSelfRepository.findUserSelfByAccount(account);
+
+        // 密码错误
+        //password = SHA.getSHA(password);
+        if (!userSelf.getPassword().equals(password))
+            return null;
+
         User user = userRepository.findUserByUserId(userSelf.getUserId());
         return user;
+//        return userRepository.findUserByAccount("abcdefg");
     }
 
     @RequestMapping(value = "register")

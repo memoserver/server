@@ -17,6 +17,9 @@ public class UserSelf implements Serializable {
 
     private int accountType;
 
+    public UserSelf() {
+    }
+
     public UserSelf(String account, String password, int accountType) {
         this.account = account;
         this.password = password;

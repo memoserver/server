@@ -15,7 +15,7 @@ public class Pri implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int privateId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserBase user;
 
