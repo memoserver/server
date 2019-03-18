@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JoiningRepository extends JpaRepository<Joining,Integer> {
-    void deleteJoiningByUser_UserIdAndPub_Public_id(int userId, int public_id);
+//    void deleteJoiningByUser_UserIdAndPub_Public_id(int userId, int public_id);
 }

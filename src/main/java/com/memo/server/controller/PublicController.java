@@ -41,12 +41,12 @@ public class PublicController {
 
     @RequestMapping(value = "delete_public")
     public void delete_public(@RequestParam("public_id") int public_id) {
-        pubRepository.deletePubByPublic_id(public_id);
+//        pubRepository.deletePubByPublic_id(public_id);
     }
 
-    @RequestMapping(value = "get_private_order_by_urgent_and_time")
-    public List<Pub> get_private_order_by_urgent_and_time(@RequestParam("user_id") int user_id) {
-        List<Pub> pubs = pubRepository.findAllByOrOrderByPublishTimeDesc();
+    @RequestMapping(value = "get_public_order_by_time")
+    public List<Pub> get_public_order_by_time(@RequestParam("user_id") int user_id) {
+        List<Pub> pubs = pubRepository.findAllByOrderByPublishTimeDesc();
         return pubs;
     }
 
@@ -60,7 +60,7 @@ public class PublicController {
 
     @RequestMapping(value = "delete_comment")
     public void delete_comment(@RequestParam("user_id") int user_id, @RequestParam("public_id") int public_id) {
-        commentRepository.deleteCommentByUser_UserIdAndPub_Public_id(user_id, public_id);
+//        commentRepository.deleteCommentByUser_UserIdAndPub_Public_id(user_id, public_id);
     }
 
     @RequestMapping(value = "join")
@@ -73,7 +73,7 @@ public class PublicController {
 
     @RequestMapping(value = "not_join")
     public void not_join(@RequestParam("user_id") int user_id, @RequestParam("public_id") int public_id) {
-        joiningRepository.deleteJoiningByUser_UserIdAndPub_Public_id(user_id, public_id);
+//        joiningRepository.deleteJoiningByUser_UserIdAndPub_Public_id(user_id, public_id);
     }
 
     @RequestMapping(value = "collect")

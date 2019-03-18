@@ -9,6 +9,7 @@
         <relativePath/> <!-- lookup parent from service -->
     </parent>
     <groupId>com.memo</groupId>
+    <packaging>jar</packaging>
     <artifactId>server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>server</name>

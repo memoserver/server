@@ -30,7 +30,7 @@ public class PrivateController {
 
     @RequestMapping(value = "get_private_order_by_urgent_and_time")
     public List<Pri> get_private_order_by_urgent_and_time(@RequestParam("user_id") int user_id) {
-        List<Pri> pris = priRepository.findPrisByUserUserIdOrdOrderByUrgentDescAlarmTimeAscPublishTimeAsc(user_id);
+        List<Pri> pris = priRepository.findPrisByUserUserIdOrderByUrgentDescAlarmTimeAscPublishTimeAsc(user_id);
         return pris;
     }
 }

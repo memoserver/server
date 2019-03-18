@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface PubRepository extends JpaRepository<Pub,Integer> {
 
-    void deletePubByPublic_id(int public_id);
+//    void deletePubByPublic_id(int public_id);
 
-    List<Pub> findAllByOrOrderByPublishTimeDesc();
+    List<Pub> findAllByOrderByPublishTimeDesc();
 }

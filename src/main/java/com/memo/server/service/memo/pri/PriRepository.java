@@ -13,5 +13,5 @@ public interface PriRepository extends JpaRepository<Pri,Integer> {
 
     void deletePriByPrivateId(int privateId);
 
-    List<Pri> findPrisByUserUserIdOrdOrderByUrgentDescAlarmTimeAscPublishTimeAsc(int userId);
+    List<Pri> findPrisByUserUserIdOrderByUrgentDescAlarmTimeAscPublishTimeAsc(int userId);
 }

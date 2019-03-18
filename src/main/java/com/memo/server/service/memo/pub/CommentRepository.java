@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment,Integer> {
-    void deleteCommentByUser_UserIdAndPub_Public_id(int userId, int public_id);
+//    void deleteCommentByUser_UserIdAndPub_Public_id(int userId, int public_id);
 }
