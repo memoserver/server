@@ -3,7 +3,7 @@ package com.memo.server.entity.user;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -18,7 +18,7 @@ public class UserBase implements Serializable {
 
     private String name;
 
-    private int gender;
+    private Boolean gender;
 
     private Date birth;
 
@@ -30,9 +30,9 @@ public class UserBase implements Serializable {
 
     private String address;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private List<Tag> tags;
+    private Set<Tag> tags;
 
     public UserBase() {
     }
@@ -69,11 +69,11 @@ public class UserBase implements Serializable {
         this.name = name;
     }
 
-    public int getGender() {
+    public Boolean getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Boolean gender) {
         this.gender = gender;
     }
 
@@ -117,11 +117,11 @@ public class UserBase implements Serializable {
         this.address = address;
     }
 
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
 }

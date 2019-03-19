@@ -1,7 +1,6 @@
 package com.memo.server.entity.memo.pub;
 
 import com.memo.server.entity.user.UserBase;
-import org.apache.ibatis.annotations.One;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +22,15 @@ public class Collection implements Serializable {
     private Pub pub;
 
     private Date time;
+
+    public Collection() {
+    }
+
+    public Collection(UserBase user, Pub pub, Date time) {
+        this.user = user;
+        this.pub = pub;
+        this.time = time;
+    }
 
     public UserBase getUser() {
         return user;

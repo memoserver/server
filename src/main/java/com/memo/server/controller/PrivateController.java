@@ -2,25 +2,52 @@ package com.memo.server.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.memo.server.entity.memo.pri.Pri;
+import com.memo.server.entity.memo.pri.PriImage;
+import com.memo.server.entity.memo.pri.PriTag;
+import com.memo.server.service.memo.pri.PriImageRepository;
 import com.memo.server.service.memo.pri.PriRepository;
+import com.memo.server.service.memo.pri.PriTagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
-@Controller
+@RestController
 public class PrivateController {
 
     @Autowired
     private PriRepository priRepository;
 
+    @Autowired
+    private PriTagRepository priTagRepository;
+
+    @Autowired
+    private PriImageRepository priImageRepository;
+
     @RequestMapping(value = "publish_private")
     public Pri publish_private(@RequestParam("pri") String json) {
-        Pri pri = (Pri) JSON.parse(json);
+        Pri pri = JSON.parseObject(json, Pri.class);
+        Set<PriImage> priImages = pri.getPriImages();
+        Set<PriTag> priTags = pri.getPriTags();
+        pri.setPriImages(null);
+        pri.setPriTags(null);
         pri = priRepository.saveAndFlush(pri);
-        return pri;
+        if (priImages != null) {
+            for (PriImage priImage : priImages) {
+                priImage.setPrivate_id(pri.getPrivateId());
+                priImageRepository.saveAndFlush(priImage);
+            }
+        }
+        if (priTags != null) {
+            for (PriTag priTag : priTags) {
+                priTag.setPrivate_id(pri.getPrivateId());
+                priTagRepository.saveAndFlush(priTag);
+            }
+        }
+        return priRepository.findPriByPrivateId(pri.getPrivateId());
     }
 
     @RequestMapping(value = "delete_private")

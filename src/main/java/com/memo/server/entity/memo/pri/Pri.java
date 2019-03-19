@@ -1,11 +1,11 @@
 package com.memo.server.entity.memo.pri;
 
-import com.memo.server.entity.user.UserBase;
+import com.memo.server.entity.user.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "private")
@@ -17,25 +17,39 @@ public class Pri implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserBase user;
+    private User user;
 
     private String title;
 
     private String content;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "private_id")
-    private List<PriImage> priImages;
+    private Set<PriImage> priImages;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "private_id")
-    private List<PriTag> priTags;
+    private Set<PriTag> priTags;
 
     private Date publishTime;
 
     private Date alarmTime;
 
     private boolean urgent;
+
+    public Pri() {
+    }
+
+    public Pri(User user, String title, String content, Set<PriImage> priImages, Set<PriTag> priTags, Date publishTime, Date alarmTime, boolean urgent) {
+        this.user = user;
+        this.title = title;
+        this.content = content;
+        this.priImages = priImages;
+        this.priTags = priTags;
+        this.publishTime = publishTime;
+        this.alarmTime = alarmTime;
+        this.urgent = urgent;
+    }
 
     public int getPrivateId() {
         return privateId;
@@ -45,11 +59,11 @@ public class Pri implements Serializable {
         this.privateId = privateId;
     }
 
-    public UserBase getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserBase user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -69,19 +83,19 @@ public class Pri implements Serializable {
         this.content = content;
     }
 
-    public List<PriImage> getPriImages() {
+    public Set<PriImage> getPriImages() {
         return priImages;
     }
 
-    public void setPriImages(List<PriImage> priImages) {
+    public void setPriImages(Set<PriImage> priImages) {
         this.priImages = priImages;
     }
 
-    public List<PriTag> getPriTags() {
+    public Set<PriTag> getPriTags() {
         return priTags;
     }
 
-    public void setPriTags(List<PriTag> priTags) {
+    public void setPriTags(Set<PriTag> priTags) {
         this.priTags = priTags;
     }
 

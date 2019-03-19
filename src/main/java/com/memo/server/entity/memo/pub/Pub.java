@@ -5,7 +5,7 @@ import com.memo.server.entity.user.UserBase;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "public")
@@ -23,13 +23,13 @@ public class Pub implements Serializable {
 
     private String content;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "public_id")
-    private List<PubImage> pubImages;
+    private Set<PubImage> pubImages;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "public_id")
-    private List<PubTag> pubTags;
+    private Set<PubTag> pubTags;
 
     private Date publishTime;
 
@@ -37,17 +37,17 @@ public class Pub implements Serializable {
 
     private String location;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "public_id")
-    private List<Collection> collections;
+    private Set<Collection> collections;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "public_id")
-    private List<Comment> comments;
+    private Set<Comment> comments;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "public_id")
-    private List<Joining> joinings;
+    private Set<Joining> joinings;
 
     public int getPublic_id() {
         return public_id;
@@ -105,43 +105,43 @@ public class Pub implements Serializable {
         this.location = location;
     }
 
-    public List<PubImage> getPubImages() {
+    public Set<PubImage> getPubImages() {
         return pubImages;
     }
 
-    public void setPubImages(List<PubImage> pubImages) {
+    public void setPubImages(Set<PubImage> pubImages) {
         this.pubImages = pubImages;
     }
 
-    public List<PubTag> getPubTags() {
+    public Set<PubTag> getPubTags() {
         return pubTags;
     }
 
-    public void setPubTags(List<PubTag> pubTags) {
+    public void setPubTags(Set<PubTag> pubTags) {
         this.pubTags = pubTags;
     }
 
-    public List<Collection> getCollections() {
+    public Set<Collection> getCollections() {
         return collections;
     }
 
-    public void setCollections(List<Collection> collections) {
+    public void setCollections(Set<Collection> collections) {
         this.collections = collections;
     }
 
-    public List<Comment> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 
-    public List<Joining> getJoinings() {
+    public Set<Joining> getJoinings() {
         return joinings;
     }
 
-    public void setJoinings(List<Joining> joinings) {
+    public void setJoinings(Set<Joining> joinings) {
         this.joinings = joinings;
     }
 }

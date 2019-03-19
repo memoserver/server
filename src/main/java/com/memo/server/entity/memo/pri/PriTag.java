@@ -17,6 +17,14 @@ public class PriTag implements Serializable {
     @Id
     private String tag;
 
+    public PriTag() {
+    }
+
+    public PriTag(int private_id, String tag) {
+        this.private_id = private_id;
+        this.tag = tag;
+    }
+
     public int getPrivate_id() {
         return private_id;
     }

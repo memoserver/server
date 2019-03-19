@@ -9,7 +9,7 @@ import com.memo.server.entity.memo.pub.Pub;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -29,7 +29,7 @@ public class User implements Serializable {
 
     private String name;
 
-    private int gender;
+    private Boolean gender;
 
     private Date birth;
 
@@ -41,49 +41,49 @@ public class User implements Serializable {
 
     private String address;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private List<Tag> tags;
+    private Set<Tag> tags;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="follow", joinColumns = {
             @JoinColumn(name="following_user_id",referencedColumnName = "userId")},inverseJoinColumns = {
             @JoinColumn(name="followed_user_id",referencedColumnName = "userId")})
-    private List<UserBase> following;
+    private Set<UserBase> following;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="follow", joinColumns = {
             @JoinColumn(name="followed_user_id",referencedColumnName = "userId")},inverseJoinColumns = {
             @JoinColumn(name="following_user_id",referencedColumnName = "userId")})
-    private List<UserBase> followed;
+    private Set<UserBase> followed;
 
     /**
      * 私有
      */
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private List<Pri> pris;
+    private Set<Pri> pris;
 
     /**
      * 公有
      */
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private List<Pub> pubs;
+    private Set<Pub> pubs;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private List<Collection> collections;
+    private Set<Collection> collections;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private List<Comment> comments;
+    private Set<Comment> comments;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private List<Joining> joinings;
+    private Set<Joining> joinings;
 
     public User() {
     }
@@ -129,11 +129,11 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public int getGender() {
+    public Boolean getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Boolean gender) {
         this.gender = gender;
     }
 
@@ -177,67 +177,67 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
 
-    public List<UserBase> getFollowing() {
+    public Set<UserBase> getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<UserBase> following) {
+    public void setFollowing(Set<UserBase> following) {
         this.following = following;
     }
 
-    public List<UserBase> getFollowed() {
+    public Set<UserBase> getFollowed() {
         return followed;
     }
 
-    public void setFollowed(List<UserBase> followed) {
+    public void setFollowed(Set<UserBase> followed) {
         this.followed = followed;
     }
 
-    public List<Pri> getPris() {
+    public Set<Pri> getPris() {
         return pris;
     }
 
-    public void setPris(List<Pri> pris) {
+    public void setPris(Set<Pri> pris) {
         this.pris = pris;
     }
 
-    public List<Pub> getPubs() {
+    public Set<Pub> getPubs() {
         return pubs;
     }
 
-    public void setPubs(List<Pub> pubs) {
+    public void setPubs(Set<Pub> pubs) {
         this.pubs = pubs;
     }
 
-    public List<Collection> getCollections() {
+    public Set<Collection> getCollections() {
         return collections;
     }
 
-    public void setCollections(List<Collection> collections) {
+    public void setCollections(Set<Collection> collections) {
         this.collections = collections;
     }
 
-    public List<Comment> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 
-    public List<Joining> getJoinings() {
+    public Set<Joining> getJoinings() {
         return joinings;
     }
 
-    public void setJoinings(List<Joining> joinings) {
+    public void setJoinings(Set<Joining> joinings) {
         this.joinings = joinings;
     }
 }
