@@ -12,17 +12,17 @@ import java.io.Serializable;
 public class PubTag implements Serializable {
 
     @Id
-    private int public_id;
+    private int publicId;
 
     @Id
     private String tag;
 
-    public int getPublic_id() {
-        return public_id;
+    public int getPublicId() {
+        return publicId;
     }
 
-    public void setPublic_id(int public_id) {
-        this.public_id = public_id;
+    public void setPublicId(int publicId) {
+        this.publicId = publicId;
     }
 
     public String getTag() {

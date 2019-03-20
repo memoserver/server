@@ -1,5 +1,6 @@
 package com.memo.server.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.memo.server.entity.memo.pri.Pri;
 import com.memo.server.entity.memo.pub.Collection;
 import com.memo.server.entity.memo.pub.Comment;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
+@JsonIgnoreProperties(value = {"pris", "pubs", "collections", "comments", "joinings"})
 public class User implements Serializable {
 
     /**
@@ -42,19 +44,19 @@ public class User implements Serializable {
     private String address;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private Set<Tag> tags;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="follow", joinColumns = {
-            @JoinColumn(name="following_user_id",referencedColumnName = "userId")},inverseJoinColumns = {
-            @JoinColumn(name="followed_user_id",referencedColumnName = "userId")})
+            @JoinColumn(name = "followingUserId", referencedColumnName = "userId")}, inverseJoinColumns = {
+            @JoinColumn(name = "followedUserId", referencedColumnName = "userId")})
     private Set<UserBase> following;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="follow", joinColumns = {
-            @JoinColumn(name="followed_user_id",referencedColumnName = "userId")},inverseJoinColumns = {
-            @JoinColumn(name="following_user_id",referencedColumnName = "userId")})
+            @JoinColumn(name = "followedUserId", referencedColumnName = "userId")}, inverseJoinColumns = {
+            @JoinColumn(name = "followingUserId", referencedColumnName = "userId")})
     private Set<UserBase> followed;
 
     /**
@@ -62,7 +64,7 @@ public class User implements Serializable {
      */
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private Set<Pri> pris;
 
     /**
@@ -70,19 +72,19 @@ public class User implements Serializable {
      */
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private Set<Pub> pubs;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private Set<Collection> collections;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private Set<Comment> comments;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private Set<Joining> joinings;
 
     public User() {

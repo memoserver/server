@@ -12,32 +12,32 @@ import java.io.Serializable;
 public class Follow implements Serializable {
 
     @Id
-    private int following_user_id;
+    private int followingUserId;
 
     @Id
-    private int followed_user_id;
+    private int followedUserId;
 
     public Follow() {
     }
 
-    public Follow(int following_user_id, int followed_user_id) {
-        this.following_user_id = following_user_id;
-        this.followed_user_id = followed_user_id;
+    public Follow(int followingUserId, int followedUserId) {
+        this.followingUserId = followingUserId;
+        this.followedUserId = followedUserId;
     }
 
-    public int getFollowing_user_id() {
-        return following_user_id;
+    public int getFollowingUserId() {
+        return followingUserId;
     }
 
-    public void setFollowing_user_id(int following_user_id) {
-        this.following_user_id = following_user_id;
+    public void setFollowingUserId(int followingUserId) {
+        this.followingUserId = followingUserId;
     }
 
-    public int getFollowed_user_id() {
-        return followed_user_id;
+    public int getFollowedUserId() {
+        return followedUserId;
     }
 
-    public void setFollowed_user_id(int followed_user_id) {
-        this.followed_user_id = followed_user_id;
+    public void setFollowedUserId(int followedUserId) {
+        this.followedUserId = followedUserId;
     }
 }

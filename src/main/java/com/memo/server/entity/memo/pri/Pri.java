@@ -1,5 +1,6 @@
 package com.memo.server.entity.memo.pri;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.memo.server.entity.user.User;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "private")
+@JsonIgnoreProperties(value = {"user"})
 public class Pri implements Serializable {
 
     @Id
@@ -16,7 +18,7 @@ public class Pri implements Serializable {
     private int privateId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private User user;
 
     private String title;
@@ -24,11 +26,11 @@ public class Pri implements Serializable {
     private String content;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "private_id")
+    @JoinColumn(name = "privateId")
     private Set<PriImage> priImages;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "private_id")
+    @JoinColumn(name = "privateId")
     private Set<PriTag> priTags;
 
     private Date publishTime;

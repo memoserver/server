@@ -11,7 +11,7 @@ public class PriImage implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int privateImageId;
 
-    private int private_id;
+    private int privateId;
 
     private String image;
 
@@ -23,12 +23,12 @@ public class PriImage implements Serializable {
         this.privateImageId = privateImageId;
     }
 
-    public int getPrivate_id() {
-        return private_id;
+    public int getPrivateId() {
+        return privateId;
     }
 
-    public void setPrivate_id(int private_id) {
-        this.private_id = private_id;
+    public void setPrivateId(int privateId) {
+        this.privateId = privateId;
     }
 
     public String getImage() {

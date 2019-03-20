@@ -8,20 +8,20 @@ import java.io.Serializable;
 
 @Entity
 @IdClass(Tag.class)
-@Table(name = "userTag")
+@Table(name = "user_tag")
 public class Tag implements Serializable {
     @Id
-    private int user_id;
+    private int userId;
 
     @Id
     private String tag;
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getTag() {

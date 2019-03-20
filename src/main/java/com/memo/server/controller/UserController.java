@@ -81,36 +81,44 @@ public class UserController {
 
     @RequestMapping(value = "modify_information")
     public User modify_information(@RequestParam("user") String json) {
+        System.out.println(json);
         User user = JSON.parseObject(json, User.class);
-        return user = userRepository.saveAndFlush(user);
+
+//        Set<Tag> tags = tagRepository.findTagsByUserId(user.getUserId());
+//        tagRepository.deleteAll(tags);
+        tagRepository.deleteTagsByUserId(user.getUserId());
+
+//        user = userRepository.saveAndFlush(user);
+
+        return userRepository.findUserByUserId(user.getUserId());
     }
 
     @RequestMapping(value = "add_tag")
     public User add_tag(@RequestParam("tag") String json) {
         Tag tag = JSON.parseObject(json, Tag.class);
         tag = tagRepository.saveAndFlush(tag);
-        return userRepository.findUserByUserId(tag.getUser_id());
+        return userRepository.findUserByUserId(tag.getUserId());
     }
 
     @RequestMapping(value = "delete_tag")
     public User delete_tag(@RequestParam("tag") String json) {
         Tag tag = JSON.parseObject(json, Tag.class);
         tagRepository.delete(tag);
-        return userRepository.findUserByUserId(tag.getUser_id());
+        return userRepository.findUserByUserId(tag.getUserId());
     }
 
     @RequestMapping(value = "add_following")
     public User add_following(@RequestParam("follow") String json) {
         Follow follow = JSON.parseObject(json, Follow.class);
         follow = followRepository.saveAndFlush(follow);
-        return userRepository.findUserByUserId(follow.getFollowing_user_id());
+        return userRepository.findUserByUserId(follow.getFollowingUserId());
     }
 
     @RequestMapping(value = "delete_following")
     public User delete_following(@RequestParam("follow") String json) {
         Follow follow = JSON.parseObject(json, Follow.class);
         followRepository.delete(follow);
-        return userRepository.findUserByUserId(follow.getFollowing_user_id());
+        return userRepository.findUserByUserId(follow.getFollowingUserId());
     }
 
     @RequestMapping(value = "view_information")

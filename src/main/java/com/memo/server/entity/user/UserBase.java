@@ -31,7 +31,7 @@ public class UserBase implements Serializable {
     private String address;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private Set<Tag> tags;
 
     public UserBase() {

@@ -1,35 +1,46 @@
 package com.memo.server.entity.memo.pub;
 
-import com.memo.server.entity.user.UserBase;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.memo.server.entity.user.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@IdClass(Comment.class)
 @Table(name = "comment")
+@JsonIgnoreProperties(value = {"user", "pub"})
 public class Comment implements Serializable {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserBase user;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int commentId;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "public_id")
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "publicId")
     private Pub pub;
 
     private String content;
 
     private Date time;
 
-    public UserBase getUser() {
+    public int getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
+    }
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserBase user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

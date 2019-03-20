@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.memo.server.controller.UserController;
 import com.memo.server.entity.user.Follow;
 import com.memo.server.entity.user.Tag;
-import com.memo.server.entity.user.User;
+import com.memo.server.entity.user.UserBase;
 import com.memo.server.entity.user.UserSelf;
 import org.junit.Before;
 import org.junit.Test;
@@ -162,7 +162,7 @@ public class UserControllerTest {
      */
     @Test
     public void modify_information() throws Exception {
-        User user = new User();
+        UserBase user = new UserBase();
         user.setUserId(6);
         user.setAccount("test");
         user.setPhoto("abc");
@@ -177,16 +177,16 @@ public class UserControllerTest {
         Set<Tag> tags = new HashSet<>();
         Tag tag1 = new Tag();
         tag1.setTag("看书");
-        tag1.setUser_id(6);
+        tag1.setUserId(6);
         tags.add(tag1);
         Tag tag2 = new Tag();
-        tag2.setUser_id(6);
+        tag2.setUserId(6);
         tag2.setTag("看电影");
         tags.add(tag2);
         user.setTags(tags);
 
         String jsonUser = JSON.toJSONString(user);
-        test("modify_information", "user", jsonUser);
+        test("/modify_information", "user", jsonUser);
     }
 
     /**
@@ -196,7 +196,7 @@ public class UserControllerTest {
     @Test
     public void add_tag() throws Exception {
         Tag tag = new Tag();
-        tag.setUser_id(6);
+        tag.setUserId(6);
         tag.setTag("听音乐");
 
         String jsonTag = JSON.toJSONString(tag);
@@ -207,7 +207,7 @@ public class UserControllerTest {
     @Test
     public void delete_tag() throws Exception {
         Tag tag = new Tag();
-        tag.setUser_id(6);
+        tag.setUserId(6);
         tag.setTag("听音乐");
 
         String jsonTag = JSON.toJSONString(tag);

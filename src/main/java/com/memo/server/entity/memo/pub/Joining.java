@@ -1,39 +1,44 @@
     package com.memo.server.entity.memo.pub;
 
-import com.memo.server.entity.user.UserBase;
+    import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+    import com.memo.server.entity.user.User;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
+    import javax.persistence.*;
+    import java.io.Serializable;
+    import java.util.Date;
 
 @Entity
-@IdClass(Joining.class)
 @Table(name = "joining")
+@JsonIgnoreProperties(value = {"user", "pub"})
 public class Joining implements Serializable {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserBase user;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int joiningId;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "public_id")
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "publicId")
     private Pub pub;
 
     private Date time;
 
-    public Joining(UserBase user, Pub pub, Date time) {
-        this.user = user;
-        this.pub = pub;
-        this.time = time;
+    public int getJoiningId() {
+        return joiningId;
     }
 
-    public UserBase getUser() {
+    public void setJoiningId(int joiningId) {
+        this.joiningId = joiningId;
+    }
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserBase user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class PriTag implements Serializable {
 
     @Id
-    private int private_id;
+    private int privateId;
 
     @Id
     private String tag;
@@ -20,17 +20,17 @@ public class PriTag implements Serializable {
     public PriTag() {
     }
 
-    public PriTag(int private_id, String tag) {
-        this.private_id = private_id;
+    public PriTag(int privateId, String tag) {
+        this.privateId = privateId;
         this.tag = tag;
     }
 
-    public int getPrivate_id() {
-        return private_id;
+    public int getPrivateId() {
+        return privateId;
     }
 
-    public void setPrivate_id(int private_id) {
-        this.private_id = private_id;
+    public void setPrivateId(int privateId) {
+        this.privateId = privateId;
     }
 
     public String getTag() {

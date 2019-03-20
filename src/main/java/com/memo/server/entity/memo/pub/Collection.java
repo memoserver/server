@@ -1,24 +1,27 @@
 package com.memo.server.entity.memo.pub;
 
-import com.memo.server.entity.user.UserBase;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.memo.server.entity.user.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@IdClass(Collection.class)
 @Table(name = "collection")
+@JsonIgnoreProperties(value = {"user", "pub"})
 public class Collection implements Serializable {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserBase user;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int collectionId;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "public_id")
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "publicId")
     private Pub pub;
 
     private Date time;
@@ -26,17 +29,25 @@ public class Collection implements Serializable {
     public Collection() {
     }
 
-    public Collection(UserBase user, Pub pub, Date time) {
+    public Collection(User user, Pub pub, Date time) {
         this.user = user;
         this.pub = pub;
         this.time = time;
     }
 
-    public UserBase getUser() {
+    public int getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(int collectionId) {
+        this.collectionId = collectionId;
+    }
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserBase user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

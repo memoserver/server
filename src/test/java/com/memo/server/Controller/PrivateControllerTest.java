@@ -50,9 +50,9 @@ public class PrivateControllerTest {
 
         List<Pri> pris = create_pri(n);
 
-        //for (int i = 0; i < pris.size(); i++) {
-        test("/publish_private", "pri", JSON.toJSONString(pris.get(0)));
-        //}
+        for (int i = 0; i < pris.size(); i++) {
+            test("/publish_private", "pri", JSON.toJSONString(pris.get(i)));
+        }
     }
 
     private List<Pri> create_pri(int n) {
@@ -109,6 +109,22 @@ public class PrivateControllerTest {
         }
 
         return pris;
+    }
+
+    /**
+     * 删除
+     */
+    @Test
+    public void delete_private() throws Exception {
+        test("/delete_private", "private_id", "30");
+    }
+
+    /**
+     * 获取
+     */
+    @Test
+    public void get_private_order_by_urgent_and_time() throws Exception {
+        test("/get_private_order_by_urgent_and_time", "user_id", "6");
     }
 
     private void test(String url, String paramName, String paramValue) throws Exception {

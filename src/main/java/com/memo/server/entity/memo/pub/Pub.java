@@ -1,6 +1,7 @@
 package com.memo.server.entity.memo.pub;
 
-import com.memo.server.entity.user.UserBase;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.memo.server.entity.user.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,26 +10,27 @@ import java.util.Set;
 
 @Entity
 @Table(name = "public")
+@JsonIgnoreProperties(value = {"user", "collections", "comments", "joinings"})
 public class Pub implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int public_id;
+    private int publicId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserBase user;
+    @JoinColumn(name = "userId")
+    private User user;
 
     private String title;
 
     private String content;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "public_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "publicId")
     private Set<PubImage> pubImages;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "public_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "publicId")
     private Set<PubTag> pubTags;
 
     private Date publishTime;
@@ -37,31 +39,31 @@ public class Pub implements Serializable {
 
     private String location;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "public_id")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "publicId")
     private Set<Collection> collections;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "public_id")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "publicId")
     private Set<Comment> comments;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "public_id")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "publicId")
     private Set<Joining> joinings;
 
-    public int getPublic_id() {
-        return public_id;
+    public int getPublicId() {
+        return publicId;
     }
 
-    public void setPublic_id(int public_id) {
-        this.public_id = public_id;
+    public void setPublicId(int publicId) {
+        this.publicId = publicId;
     }
 
-    public UserBase getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserBase user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
