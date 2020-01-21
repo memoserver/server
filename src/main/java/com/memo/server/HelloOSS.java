@@ -9,10 +9,10 @@ import java.util.Date;
 
 
 public class HelloOSS {
-    public static String bucketName = "memorandum";
-    private static String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
-    private static String accessKeyId = "LTAIJPaivcoBCU9v";
-    private static String accessKeySecret = "umP1Ao6jMPVjriz2NtBbyE7fSQAT9k";
+    public static String bucketName = "";
+    private static String endpoint = "";
+    private static String accessKeyId = "";
+    private static String accessKeySecret = "";
     OSSClient ossClient;
 
     public void openOss() {
